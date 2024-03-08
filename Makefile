@@ -1,54 +1,46 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: bikourar <bikourar@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/12 10:36:12 by bikourar          #+#    #+#              #
-#    Updated: 2024/03/04 23:01:05 by bikourar         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = push_swap
 NAME_BONUS = checker
-# PATH = ./push_swap_bonus
-FILES = ft_atoi.c ft_countword.c ft_strjoin.c ft_split.c ft_strlen.c ft_convert.c ft_free_Dynamic.c ft_creat.c \
-		ft_rules_a.c ft_rules_b.c ft_rules_mix.c ft_free_stack.c  ft_sort_stack_big.c ft_sort_stack_of_three.c \
-		ft_sort_stack_of_tow.c ft_sort_stack_of_four.c ft_lstsize.c ft_lstlast.c main.c
+FILES = ./Mandatory/ft_atoi.c ./Mandatory/ft_countword.c ./Mandatory/ft_strjoin.c ./Mandatory/ft_split.c  ./Mandatory/ft_strlen.c \
+		./Mandatory/ft_convert.c ./Mandatory/ft_free_Dynamic.c ./Mandatory/ft_creat.c ./Mandatory/ft_rules_a.c ./Mandatory/ft_rules_b.c \
+		./Mandatory/ft_rules_mix.c ./Mandatory/ft_free_stack.c ./Mandatory/ft_sort_stack_big.c  ./Mandatory/ft_sort_stack_of_three.c ./Mandatory/ft_sort_stack_of_tow.c \
+		./Mandatory/ft_sort_stack_of_four.c ./Mandatory/ft_lstsize.c ./Mandatory/ft_lstlast.c ./Mandatory/ft_isdigit.c ./Mandatory/main.c 
 
-FILES_BONUS = ./push_swap_bonus/main_bonus.c ./push_swap_bonus/ft_strjoin_bonus.c ./push_swap_bonus/ft_atoi_bonus.c ./push_swap_bonus/ft_convert_bonus.c ./push_swap_bonus/ft_count_word_bonus.c \
-		./push_swap_bonus/ft_creat_bonus.c ./push_swap_bonus/ft_free_Dynamic_bonus.c ./push_swap_bonus/ft_free_stack_bonus.c ./push_swap_bonus/ft_rules_a_bonus.c ./push_swap_bonus/ft_rules_b_bonus.c \
-		./push_swap_bonus/ft_rules_mix_bonus.c ./push_swap_bonus/ft_split_bonus.c ./push_swap_bonus/ft_strlen_bonus.c ./push_swap_bonus/get_next_line_bonus.c ./push_swap_bonus/get_next_utils_bonus.c \
-		./push_swap_bonus/ft_strcmp_bonus.c
+FILES_BONUS = ./Bonus/main_bonus.c ./Bonus/ft_strjoin_bonus.c ./Bonus/ft_atoi_bonus.c ./Bonus/ft_convert_bonus.c ./Bonus/ft_count_word_bonus.c \
+		./Bonus/ft_creat_bonus.c ./Bonus/ft_free_Dynamic_bonus.c ./Bonus/ft_free_stack_bonus.c ./Bonus/ft_rules_a_bonus.c ./Bonus/ft_rules_b_bonus.c \
+		./Bonus/ft_rules_mix_bonus.c ./Bonus/ft_split_bonus.c ./Bonus/ft_strlen_bonus.c ./Bonus/get_next_line_bonus.c ./Bonus/get_next_utils_bonus.c \
+		./Bonus/ft_strcmp_bonus.c ./Bonus/ft_lstnew_bonus.c ./Bonus/ft_lstadd_back_bonus.c ./Bonus/ft_lstclear_bonus.c ./Bonus/ft_isdigit.c
+
+RED = \033[0;31m
+GREEN = \033[0;32m
 
 CFLAGS = -Wall -Wextra -Werror
-
-# OPEN = $(PATH)/$(FILES_BONUS)
 OBJ = $(FILES:.c=.o)
 OBJ_B = $(FILES_BONUS:.c=.o)
 
 all						: $(NAME)
 
 $(NAME)					: $(OBJ)
-	cc $(CFLAGS) $(OBJ) -o $(NAME)
+	@cc $(OBJ) -o $(NAME)
+	@echo "$(GREEN)make push_swap"
 
 bonus					: $(NAME_BONUS)
 
 $(NAME_BONUS)			: $(OBJ_B)
-	cc $(CFLAGS) $(OBJ_B) -o $(NAME_BONUS)
+	@cc $(OBJ_B) -o $(NAME_BONUS)
+	@echo "$(GREEN)make checker"
 
-/push_swap_bonus/%.o	: /push_swap_bonus/$(%.c && %.h)
-	cc $(CFLAGS) -c $< -o $@
+./Bonus/%.o	:	./Bonus/%.c ./Bonus/push_swap_bonus.h
+	@cc $(CFLAGS) -c $< -o $@
 
-%.o						: %.c push_swap.h
-	cc $(CFLAGS) -c $< -o $@
+ ./Mandatory/%.o		:  ./Mandatory/%.c push_swap.h
+	@cc $(CFLAGS) -c $< -o $@
 
 fclean					: clean
-	rm -rf $(NAME) $(NAME_BONUS)
+	@rm -f $(NAME) $(NAME_BONUS)
+	@echo "$(RED)clean push_swap"
 
 clean					:
-	rm	-rf $(OBJ) $(OBJ_B)
+	@rm	-f $(OBJ) $(OBJ_B)
 
 re						: fclean all
 
